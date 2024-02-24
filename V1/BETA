@@ -1,0 +1,123 @@
+-- Create ScreenGui
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+
+-- Create Frame to hold GUI elements
+local guiFrame = Instance.new("Frame")
+guiFrame.Name = "GUIFrame"
+guiFrame.Parent = screenGui
+guiFrame.Size = UDim2.new(0, 200, 0, 150)  -- Adjusted height for the big box
+guiFrame.Position = UDim2.new(0.5, -100, 0.5, -75)
+guiFrame.BackgroundTransparency = 1  -- Fully transparent
+
+-- Create TextBox
+local textBox = Instance.new("TextBox")
+textBox.Name = "AITextBox"
+textBox.Parent = guiFrame
+textBox.Size = UDim2.new(1, 0, 0, 30)
+textBox.Position = UDim2.new(0, 0, 0, 0)
+textBox.Text = "Type here..."
+textBox.TextSize = 14
+textBox.TextWrapped = true  -- Enable text wrapping for multiline display
+textBox.TextXAlignment = Enum.TextXAlignment.Left
+textBox.TextYAlignment = Enum.TextYAlignment.Top
+textBox.MultiLine = true  -- Allow multiple lines
+
+-- Create big box for text to appear
+local textDisplay = Instance.new("TextLabel")
+textDisplay.Name = "AITextDisplay"
+textDisplay.Parent = guiFrame
+textDisplay.Size = UDim2.new(1, 0, 1, -30)  -- Adjusted size to leave space for the TextBox
+textDisplay.Position = UDim2.new(0, 0, 0, 30)  -- Adjusted position to start below the TextBox
+textDisplay.BackgroundTransparency = 1  -- Fully transparent
+textDisplay.TextWrapped = true
+textDisplay.TextXAlignment = Enum.TextXAlignment.Left
+textDisplay.TextYAlignment = Enum.TextYAlignment.Top
+textDisplay.TextSize = 14
+
+-- Function to handle user input and provide AI-like response
+textBox.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        -- Process user input and provide AI-like response
+        local userInput = textBox.Text:lower()
+        print("User Input:", userInput)
+
+        local aiResponse = generateResponse(userInput)
+        textDisplay.Text = "AI Response: " .. aiResponse
+    end
+end)
+
+-- Credits
+local credits = Instance.new("TextLabel")
+credits.Name = "CreditsLabel"
+credits.Parent = guiFrame
+credits.Size = UDim2.new(2, 2, 0, 25)
+credits.Position = UDim2.new(0, 2, 1, -20)
+credits.Text = "Made by your local long dick daddy🥵"
+credits.TextSize = 12
+
+-- Keep GUI elements together
+game:GetService("RunService").RenderStepped:Connect(function()
+    guiFrame.Size = UDim2.new(0, 200, 0, 150)  -- Adjusted height for the big box
+    guiFrame.Position = UDim2.new(0.5, -100, 0.5, -75)
+end)
+
+-- Simple function to generate AI-like responses
+function generateResponse(userInput)
+    local lowerInput = userInput:lower()
+
+    local responses = {
+        ["wsg ma"] = "Disgusting bitch",
+        ["wsp"] = "What's up?",
+        ["hello"] = "Hi there!",
+        ["how are you"] = "I'm just a script, but thanks for asking!",
+        ["shush i hear u responding"] = "mate i aint typing even",
+        ["robot"] = "try plural",
+        ["let's play a game"] = "Let's play a game!",
+        ["idiot"] = "Hey now, let's keep it friendly!",
+        ["stupid"] = "Let's use positive language!",
+        ["pls understand"] = "Sorry im in a work progress this is beta.",
+        ["fuck"] = "HEY!",
+        ["bro"] = "mhm?",
+        ["yo"] = "yoo",
+        ["i love rainbows"] = "Rainbows bring joy and color!",
+        ["what music should i listen to"] = "Music is the universal language! but im an AI i dont know.",
+        ["i love sunshine"] = "Sunshine brightens any day!",
+        ["i bought some books"] = "Books open doors to new worlds!",
+        ["nah"] = "what.?",
+        ["i love gaming"] = "Gaming is a fantastic hobby!",
+        ["hi"] = "A good night's sleep is essential!",
+        ["dogs"] = "Dogs are loyal companions!",
+        ["cats"] = "Cats are independent and adorable!",
+        ["beach"] = "The beach is a relaxing destination!",
+        ["mountain"] = "Mountains offer breathtaking views!",
+        ["i always watch movies"] = "Movies provide entertainment and escape!",
+        ["i eat a lot of chocolate"] = "Chocolate is a delightful treat! and fattening.",
+        ["i exercise a lot"] = "Exercise is essential for a healthy lifestyle!",
+        ["i heard glass breaking next door and screams im scared"] = "Call 911! or whatever your police is",
+        ["i hear lots of laughter"] = "Laughter is the best medicine! they're having fun",
+        ["coding is so hard!"] = "Coding is a creative and problem-solving journey! it can be hard sometimes but you'll get it one day.",
+        ["can u remind me of my childhood"] = "Sorry. I'm AI, but an apple a day keeps the doctor away! I tried. sorry😅",
+        ["my bf bought me a flower"] = "Flowers add beauty to any occasion!",
+        ["i have a hobby"] = "Having a hobby brings joy and fulfillment!",
+        ["technology is crazy"] = "Yep! Really taking over. I'm Technology! Crazy right?",
+        ["its raining /:"] = "Rainy days can be cozy and calming! don't worry",
+        ["i love holidays"] = "Nice! Holidays are times for joy and celebration!",
+        ["i love oceans"] = "The ocean is full of wonders and mysteries!",
+    }
+
+    for word, response in pairs(responses) do
+        if string.find(lowerInput, word) then
+            return response
+        end
+    end
+
+    if string.len(userInput) == 1 then
+        return "Seems like you said one letter. Did you mean to say something else?"
+    else
+        wait(1.5)  -- Adding a delay of 1.5 seconds specifically for this response
+        return "I couldn't process your message! Sorry, I'm a work in progress."
+    end
+end
