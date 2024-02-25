@@ -55,7 +55,7 @@ credits.Name = "CreditsLabel"
 credits.Parent = guiFrame
 credits.Size = UDim2.new(2, 2, 0, 25)
 credits.Position = UDim2.new(0, 2, 1, -20)
-credits.Text = "Made by your local long dick daddy🥵"
+credits.Text = "Made by your local"
 credits.TextSize = 12
 
 -- Keep GUI elements together
